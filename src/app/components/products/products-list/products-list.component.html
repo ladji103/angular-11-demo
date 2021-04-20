@@ -1,0 +1,56 @@
+<div class="container" *ngIf="products$">
+  <ng-container *ngIf="(products$ | async) as result" [ngSwitch]="result.dataState">
+    <ng-container *ngSwitchCase="DataStatEnum.LOADING">
+      <div class="text-info">Patientez ...</div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="DataStatEnum.LOADED">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Quantité</th>
+          <th scope="col">Sélectioné</th>
+          <th scope="col">Disponibilité</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr *ngFor="let product of result.data">
+          <th scope="col">{{product.id}}</th>
+          <th scope="col">{{product.name}}</th>
+          <th scope="col">{{product.price}}</th>
+          <th scope="col">{{product.quantity}}</th>
+          <th scope="col">{{getStatSelected(product.selected)}}</th>
+          <th scope="col">{{getStatSelected(product.available)}}</th>
+          <th>
+            <input type="checkbox" (click)="onSelect(product)"
+                   class="btn btn-sm"
+                   [checked]="product.selected"
+                   [ngClass]="product.selected ? 'btn-success' : 'btn-danger'">
+          </th>
+          <th>
+            <button class="btn btn-sm btn-primary" (click)="editProduct(product)">
+              <span class="fa fa-edit"></span>
+            </button>
+          </th>
+          <th>
+            <button class="btn btn-sm btn-danger" (click)="onDeleteProduct(product)">
+              <span class="fa fa-trash-o"></span>
+            </button>
+          </th>
+        </tr>
+        </tbody>
+      </table>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="DataStatEnum.ERROR">
+      <div class="text-danger">
+        {{result.error}}
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

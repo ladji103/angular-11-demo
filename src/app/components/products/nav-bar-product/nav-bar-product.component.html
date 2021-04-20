@@ -1,0 +1,16 @@
+<nav class="navbar navbar-light bg-light">
+  <form class="form-inline">
+    <button class="btn btn-outline-info ml-2" type="button" (click)="loadProducts()">Tous les produits</button>
+    <button class="btn btn-outline-info ml-2" type="button" (click)="loadSelectedProduct()">Sélectionés</button>
+    <button class="btn btn-outline-info ml-2" type="button" (click)="loadAvailableProduct()">Disponibles</button>
+    <button class="btn btn-outline-info ml-2" type="button" (click)="newProduct()">Ajouter un produit</button>
+  </form>
+  <form class="form-inline ml-auto" #f="ngForm" (ngSubmit)="searchProducts(f.value)">
+    <div class="form-group">
+      <input ngModel name="keyword" type="text" class="form-control">
+      <button class="btn btn-outline-info ml-2">
+        <span class="fa fa-search"></span>
+      </button>
+    </div>
+  </form>
+</nav>
