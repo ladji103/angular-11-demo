@@ -6,7 +6,15 @@
       "price": 900000,
       "quantity": 3,
       "available": true,
-      "selected": true
+      "selected": false
+    },
+    {
+      "id": 2,
+      "name": "Ordinateur",
+      "price": 500000,
+      "quantity": 5,
+      "available": true,
+      "selected": false
     }
   ]
 }

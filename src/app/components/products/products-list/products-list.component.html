@@ -18,31 +18,10 @@
         </tr>
         </thead>
         <tbody>
-        
-        <tr *ngFor="let product of result.data">
-          <th scope="col">{{product.id}}</th>
-          <th scope="col">{{product.name}}</th>
-          <th scope="col">{{product.price}}</th>
-          <th scope="col">{{product.quantity}}</th>
-          <th scope="col">{{getStatSelected(product.selected)}}</th>
-          <th scope="col">{{getStatSelected(product.available)}}</th>
-          <th>
-            <input type="checkbox" (click)="onSelect(product)"
-                   class="btn btn-sm"
-                   [checked]="product.selected"
-                   [ngClass]="product.selected ? 'btn-success' : 'btn-danger'">
-          </th>
-          <th>
-            <button class="btn btn-sm btn-primary" (click)="editProduct(product)">
-              <span class="fa fa-edit"></span>
-            </button>
-          </th>
-          <th>
-            <button class="btn btn-sm btn-danger" (click)="onDeleteProduct(product)">
-              <span class="fa fa-trash-o"></span>
-            </button>
-          </th>
-        </tr>
+          <app-product-item *ngFor="let product of result.data"
+                            [product]="product">
+
+          </app-product-item>
         </tbody>
       </table>
     </ng-container>

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ActionEvent, EventActionTypes} from '../../../state/product.state';
+import {EventDriverService} from '../../../services/event.driver.service';
 
 @Component({
   selector: 'app-nav-bar-product',
@@ -8,16 +9,21 @@ import {ActionEvent, EventActionTypes} from '../../../state/product.state';
 })
 export class NavBarProductComponent implements OnInit {
 
-  @Output() productEventAction: EventEmitter<ActionEvent> = new EventEmitter<ActionEvent>();
+  // @Output() productEventAction: EventEmitter<ActionEvent> = new EventEmitter<ActionEvent>();
 
-  constructor() {
+  constructor(private eventDriverService: EventDriverService) {
   }
 
   ngOnInit(): void {
   }
 
   loadProducts() {
-    this.productEventAction.emit(
+    // this.productEventAction.emit(
+    //   {
+    //     type: EventActionTypes.GET_ALL_PRODUCTS
+    //   }
+    // );
+    this.eventDriverService.publishEvent(
       {
         type: EventActionTypes.GET_ALL_PRODUCTS
       }
@@ -25,7 +31,7 @@ export class NavBarProductComponent implements OnInit {
   }
 
   loadSelectedProduct() {
-    this.productEventAction.emit(
+    this.eventDriverService.publishEvent(
       {
         type: EventActionTypes.GET_SELECTED_PRODUCTS
       }
@@ -33,7 +39,7 @@ export class NavBarProductComponent implements OnInit {
   }
 
   loadAvailableProduct() {
-    this.productEventAction.emit(
+    this.eventDriverService.publishEvent(
       {
         type: EventActionTypes.GET_AVAILABLE_PRODUCTS
       }
@@ -41,7 +47,7 @@ export class NavBarProductComponent implements OnInit {
   }
 
   searchProducts(dataForm: any) {
-    this.productEventAction.emit(
+    this.eventDriverService.publishEvent(
       {
         type: EventActionTypes.SEARCH_PRODUCTS,
         payload: dataForm
@@ -50,7 +56,7 @@ export class NavBarProductComponent implements OnInit {
   }
 
   newProduct() {
-    this.productEventAction.emit(
+    this.eventDriverService.publishEvent(
       {
         type: EventActionTypes.NEW_PRODUCT
       }
